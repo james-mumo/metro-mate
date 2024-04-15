@@ -9,18 +9,20 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppLayout from "./AppLayout";
 import Map from "./Map";
 import Stops from "./components/Stops";
+import Dash from "./components/Dash";
 
 function App() {
   return (
     <div className="flex justify-center items-center h-screen p-0">
-      <div className="min-w-[390px] w-[400px] border flex flex-col p-0">
+      <div className="min-w-[390px] w-[400px] flex flex-col p-0 bg-gray-900">
         <Router>
           <Switch>
             <Route path="/">
               <AppLayout>
                 <Switch>
-                  <Route exact path="/" component={Map} />
+                  <Route exact path="/" component={Dash} />
                   <Route exact path="/stops" component={Stops} />
+                  <Route exact path="/map" component={Map} />
                   {/*   <Route exact path="/classes">
                   <Classes openAddModal={openAddModal} />
                 </Route>

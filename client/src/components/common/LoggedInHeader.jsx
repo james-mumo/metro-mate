@@ -1,11 +1,11 @@
 import React from "react";
-import SchoolIcon from "@mui/icons-material/School";
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import PaymentsIcon from "@mui/icons-material/Payments";
+import { AssistantDirectionRounded } from "@mui/icons-material";
+import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
+import { TroubleshootRounded } from "@mui/icons-material";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import BadgeIcon from "@mui/icons-material/Badge";
-import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
+import { ShareLocation } from "@mui/icons-material";
+import { BusAlert, Explore } from "@mui/icons-material";
 import { useHistory, Link } from "react-router-dom";
 
 const LoggedInHeader = () => {
@@ -24,54 +24,63 @@ const LoggedInHeader = () => {
   };
 
   return (
-    <div className="bg-teal-700 text-white py-0 flex justify-between items-center px-0">
-      <nav className="flex-1 flex items-center justify-start  py-4">
-        <ul className="flex gap-4 ">
+    <div className="bg-gray-900 text-white py-0 flex justify-between items-center px-0">
+      <nav className="flex-1 flex items-center justify-start py-0">
+        <ul className="flex justify-evenly flex-row items-stretch flex-1">
           <li className="flex flex-col">
             <a
               href="/"
-              className="hover:text-teal-300 cursor-pointer hover:bg-teal-900 transition duration-300 p-3 rounded-md flex items-center flex-col gap-1"
+              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
             >
-              <SchoolIcon className="mr-2 text-teal-300" />
+              <DirectionsBusIcon className="mr-0 text-gray-200" />
               Home
+            </a>
+          </li>
+          <li className="flex flex-col">
+            <a
+              href="/map"
+              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
+            >
+              <Explore className="mr-0 text-gray-200" />
+              Map
             </a>
           </li>
           <li className="flex flex-col">
             <Link
               to="/stops"
-              className="hover:text-teal-300 cursor-pointer hover:bg-teal-900 transition duration-300 p-3 rounded-md flex items-center flex-col gap-1"
+              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
             >
-              <CollectionsBookmarkIcon className="mr-2 text-teal-300" />
+              <ShareLocation className="mr-0 text-gray-200" />
               Stops
             </Link>
           </li>
           <li className="flex flex-col">
             <a
               href="#"
-              className="hover:text-teal-300 cursor-pointer hover:bg-teal-900 transition duration-300 p-3 rounded-md flex items-center flex-col gap-1"
+              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
             >
-              <PaymentsIcon className="mr-2 text-teal-300" />
-              Add Classes
+              <TroubleshootRounded className="mr-0 text-gray-200" />
+              Search
             </a>
           </li>
           <li className="flex flex-col">
             <a
               href="#"
-              className="hover:text-teal-300 cursor-pointer hover:bg-teal-900 transition duration-300 p-3 rounded-md flex items-center flex-col gap-1"
+              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
             >
-              <BadgeIcon className="mr-2 text-teal-300" />
-              Profile
+              <AssistantDirectionRounded className="mr-0 text-gray-200" />
+              P2P
             </a>
           </li>
-          {/* <li className="flex flex-col">
+          <li className="flex flex-col">
             <a
               onClick={handleLogout}
-              className="hover:text-teal-300 cursor-point hover:bg-teal-900 transition duration-300 p-3 rounded-md flex items-center flex-col"
+              className="hover:text-gray-200 cursor-point hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col text-gray-200"
             >
-              <ExitToAppIcon className="mr-2 text-teal-300" />
-              Log Out
+              <BusAlert className="mr-0 text-gray-200" />
+              Notice
             </a>
-          </li> */}
+          </li>
         </ul>
       </nav>
     </div>

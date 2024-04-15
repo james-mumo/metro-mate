@@ -1,8 +1,18 @@
-import React from "react";
-import { routes, buses } from "../../utils/data"; 
+import React, { useState } from "react";
+import { useRoutes, useBuses } from "../../utils/api";
 import { RadioButtonUnchecked } from "@mui/icons-material";
 
 function ListRoutes() {
+  const { loading: busesLoading, error: busesError, buses } = useBuses();
+  const { loading: routesLoading, error: routesError, routes } = useRoutes();
+
+  if (busesLoading || routesLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (busesError || routesError) {
+    return <div>Error: {busesError || routesError}</div>;
+  }
   return (
     <div className="bg-gray-900">
       <div className="flex flex-col">

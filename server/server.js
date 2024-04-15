@@ -17,12 +17,19 @@ dotenv.config();
 // Create Express app
 const app = express();
 const port = 4000;
-const hostname = "localhost";
 
 // Middleware setup
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Middleware to allow CORS
 app.use(cors());
+
+app.use(express.json());
+
+// Import and use the router
+app.use("/api/routes", routeRoutes);
+app.use("/api/buses", busRoutes);
 
 // MongoDB connection
 const uri = `mongodb+srv://98kithome:98kithome@cluster0.ijx96ju.mongodb.net/metro_mate`;

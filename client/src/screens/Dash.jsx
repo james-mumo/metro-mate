@@ -10,7 +10,7 @@ import {
   Badge,
   Deck,
 } from "@mui/icons-material";
-import { appName, minibuses, buses } from "../utils/data"; // Import the exported arrays
+import { useBuses, useRoutes } from "../utils/api";
 
 function Dash() {
   const [isOpen, setIsOpen] = useState(true);
@@ -24,6 +24,17 @@ function Dash() {
   const handleClick = (item) => {
     setActiveItem(item);
   };
+
+  const { loading: busesLoading, error: busesError, buses } = useBuses();
+  const { loading: routesLoading, error: routesError, routes } = useRoutes();
+
+  if (busesLoading || routesLoading) {
+    return <div className="bg-gray-800 w-full">Loading...</div>;
+  }
+
+  if (busesError || routesError) {
+    return <div>Error: {busesError || routesError}</div>;
+  }
 
   return (
     <div className="flex flex-col overflow-y-scroll bg-gray-900 w-full gap-1">
@@ -119,49 +130,72 @@ function Dash() {
           }
           open={isOpen}
         >
-          <ul className=" bg-gray-800 flex flex-col gap-2 px-1">
-            {buses.map((bus) => (
-              <li
-                key={bus.id}
-                className="rounded-md flex gap-2 w-full cursor-pointer bg-gray-700"
-              >
-                <span className="text-yellow-400 p-2 font-bold items-center flex align-middle text-lg">
-                  {bus.busNo}
-                </span>
-                <div className="flex flex-col w-full">
-                  <div className="flex px-3 w-full ">
-                    <span className="flex flex-1 gap-2 text-sm items-center align-middle">
-                      To: <span className="font-bold text-md"> {bus.to}</span>
-                      <span className="text-[12px]">
-                        (Ksh.{bus.calculateFare()})
-                      </span>
-                    </span>
+          <ul className="bg-gray-800 flex flex-col gap-2 px-1">
+            {buses.map((bus) => {
+              const calculateFare = () => {
+                let totalFare = 0;
+                const route = routes.find((route) => route.id === bus.routeId);
+                if (!route) {
+                  throw new Error(`Route with ID ${bus.routeId} not found.`);
+                }
+                const currentStageIndex = route.stages.findIndex(
+                  (stage) => stage.name === bus.currentLocation
+                );
+                if (currentStageIndex !== -1) {
+                  for (
+                    let i = currentStageIndex;
+                    i < route.stages.length;
+                    i++
+                  ) {
+                    totalFare += route.stages[i].fare;
+                  }
+                }
+                return totalFare;
+              };
 
-                    <span className="text-sm gap-1 flex">
-                      <span className="text-yellow-400 font-bold">
-                        {" "}
-                        {bus.timeToStage} - {bus.timeToStage + 12}
-                      </span>{" "}
-                      mins
-                    </span>
-                  </div>
-                  <div className="flex px-3">
-                    <span className="flex flex-1 gap-2 text-sm items-center align-bottom">
-                      At:
-                      <span className="font-bold text-md">
-                        {bus.currentLocation}
-                      </span>
-                    </span>
-                    <span className="text-sm gap-2 flex">
-                      {bus.timeToCurrentLocation} mins
-                    </span>
-                  </div>
-                  <span className="px-2 text-[10px] italic font-medium text-yellow-400">
-                    {bus.sacco}
+              return (
+                <li
+                  key={bus.id}
+                  className="rounded-md flex gap-2 w-full cursor-pointer bg-gray-700"
+                >
+                  <span className="text-yellow-400 p-2 font-bold items-center flex align-middle text-lg">
+                    {bus.busNo}
                   </span>
-                </div>
-              </li>
-            ))}
+                  <div className="flex flex-col w-full">
+                    <div className="flex px-3 w-full ">
+                      <span className="flex flex-1 gap-2 text-sm items-center align-middle">
+                        To:
+                        <span className="font-bold text-md"> {bus.to}</span>
+                        <span className="text-[12px]">
+                          (Ksh.{calculateFare()})
+                        </span>
+                      </span>
+                      <span className="text-sm gap-1 flex">
+                        <span className="text-yellow-400 font-bold">
+                          {bus.timeToStage} - {bus.timeToStage + 12}
+                        </span>{" "}
+                        mins
+                      </span>
+                    </div>
+                    <div className="flex px-3">
+                      <span className="flex flex-1 gap-2 text-sm items-center align-bottom">
+                        At:
+                        <span className="font-bold text-md">
+                          {bus.currentLocation}
+                        </span>
+                      </span>
+                      <span className="text-sm gap-2 flex">
+                        {bus.timeToCurrentLocation} mins
+                      </span>
+                    </div>
+                    <span className="px-2 ml-1 flex gap-2 text-[10px] italic font-medium text-yellow-400">
+                      <span> {bus.numberPlate}</span>
+                      {bus.sacco}
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </Collapsible>
       </div>

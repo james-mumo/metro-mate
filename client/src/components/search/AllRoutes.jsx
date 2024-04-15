@@ -1,7 +1,17 @@
-import React from "react";
-import { routes, buses } from "../../utils/data"; // Import routes and buses from your file
+import React, { useState } from "react";
+import { useRoutes } from "../../utils/api";
 
 function AllRoutes() {
+  const { loading: busesLoading, error: busesError, buses } = useBuses();
+  const { loading: routesLoading, error: routesError, routes } = useRoutes();
+
+  if (busesLoading || routesLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (busesError || routesError) {
+    return <div>Error: {busesError || routesError}</div>;
+  }
   return (
     <div>
       {routes.map((route) => (

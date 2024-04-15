@@ -1,7 +1,18 @@
-import React from "react";
-import { buses, routes } from "../../utils/data";
+import React, { useState, useEffect } from "react";
+import { useRoutes, useBuses } from "../../utils/api";
 
 function ListBuses() {
+  const { loading: busesLoading, error: busesError, buses } = useBuses();
+  const { loading: routesLoading, error: routesError, routes } = useRoutes();
+
+  if (busesLoading || routesLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (busesError || routesError) {
+    return <div>Error: {busesError || routesError}</div>;
+  }
+
   return (
     <div className="bg-gray-900">
       <div className="flex flex-col">
@@ -16,6 +27,22 @@ function ListBuses() {
           const nextStage = currentStage
             ? route.stages.find((stage) => stage.name === currentStage.next)
             : null;
+
+          const calculateFare = () => {
+            let totalFare = 0;
+            const currentStageIndex = route.stages.findIndex(
+              (stage) => stage.name === bus.currentLocation
+            );
+            if (currentStageIndex !== -1) {
+              for (let i = currentStageIndex; i < route.stages.length; i++) {
+                totalFare += route.stages[i].fare;
+              }
+            }
+            return totalFare;
+          };
+
+          // Attach calculateFare function to bus object
+          bus.calculateFare = calculateFare;
 
           return (
             <div

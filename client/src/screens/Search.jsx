@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
-import { routes, buses } from "../utils/data";
-import ListRoutes from "./search/ListRoutes";
+import ListRoutes from "../components/search/ListRoutes";
+import ListBuses from "../components/search/ListBuses";
 
 function Search() {
   const [activeItem, setActiveItem] = useState("Recent");
@@ -14,7 +13,7 @@ function Search() {
   return (
     <div className="flex flex-col overflow-y-scroll bg-gray-900 w-full gap-0">
       <div className="flex flex-col flex-1 h-max">
-        <div className="flex flex-row h-[40px] justify-evenly gap-2 overflow-x-auto mt-0 left-0 right-0 bg-gray-900 sticky top-0">
+        <div className="flex flex-row h-[40px] justify-evenly gap-2 overflow-x-auto mt-0 left-0 z-10 right-0 bg-gray-900 sticky top-0">
           <ArrowBackIosNew className="text-gray-400 text-sm" />
           <span
             onClick={() => handleClick("Recent")}
@@ -61,9 +60,9 @@ function Search() {
           <ArrowForwardIos className="text-gray-400 text-sm" />
         </div>
 
-        <div>
-          <ListRoutes />
-        </div>
+        {/* Conditionally render ListRoutes or ListBuses based on the activeItem */}
+        {activeItem === "Routes" && <ListRoutes />}
+        {activeItem === "Buses" && <ListBuses />}
       </div>
     </div>
   );

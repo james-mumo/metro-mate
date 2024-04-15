@@ -25,7 +25,7 @@ const LoggedInHeader = () => {
         <ul className="flex justify-evenly flex-row items-stretch flex-1">
           <li className="flex flex-col">
             <Link
-              to="/"
+              to="/home"
               className={`hover:text-gray-200 cursor-pointer transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 ${
                 activeItem === "Home" ? "text-yellow-400" : "text-gray-200"
               }`}

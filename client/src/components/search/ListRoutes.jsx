@@ -1,5 +1,6 @@
 import React from "react";
-import { routes, buses } from "../../utils/data"; // Import routes and buses from your file
+import { routes, buses } from "../../utils/data"; 
+import { RadioButtonUnchecked } from "@mui/icons-material";
 
 function ListRoutes() {
   return (
@@ -15,6 +16,9 @@ function ListRoutes() {
             0
           );
 
+          // Filter buses for this route
+          const filteredBuses = buses.filter((bus) => bus.routeId === route.id);
+
           return (
             <div
               key={route.id}
@@ -24,20 +28,28 @@ function ListRoutes() {
                 <h2 className="text-yellow-400 text-sm flex-1">{route.name}</h2>
                 <h2 className="text-yellow-400 text-sm">Ksh. {totalFare}</h2>
               </div>
-              <div className="flex flex-col">
-                <span>Via: </span>
-                <div className="flex">
-                  {route.stages.map((stage) => (
-                    <span key={stage.name}>{stage.name}</span>
-                  ))}
+              <div className="flex ">
+                <span className="text-sm font-semibold">Via: </span>
+                <div className="flex w-full overflow-scroll">
+                  <div className="flex w-full flex-wrap">
+                    {route.stages.map((stage) => (
+                      <span
+                        className="flex px-2 text-sm opacity-85 items-center gap-1"
+                        key={stage.name}
+                        style={{ whiteSpace: "nowrap" }}
+                      >
+                        <RadioButtonUnchecked style={{ fontSize: 8 }} />{" "}
+                        {stage.name}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
               <h3>Buses on this route:</h3>
-              <ul>
-                {buses
-                  .filter((bus) => bus.routeId === route.id)
-                  .map((bus) => (
-                    <li key={bus.id} className="flex flex-col">
+              <div>
+                {filteredBuses.length > 0 ? (
+                  filteredBuses.map((bus) => (
+                    <div key={bus.id} className="flex flex-col">
                       <span>
                         Bus {bus.busNo} at {bus.currentLocation} towards{" "}
                         {bus.to}{" "}
@@ -47,9 +59,12 @@ function ListRoutes() {
                         {bus.timeToCurrentLocation} mins),
                         <span className="ml-4">{bus.capacity} Seater</span>
                       </span>
-                    </li>
-                  ))}
-              </ul>
+                    </div>
+                  ))
+                ) : (
+                  <div>No buses available</div>
+                )}
+              </div>
             </div>
           );
         })}

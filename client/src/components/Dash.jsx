@@ -19,33 +19,64 @@ function Dash() {
     setIsOpen((prevOpen) => !prevOpen);
   };
 
+  const [activeItem, setActiveItem] = useState("NearBy");
+
+  const handleClick = (item) => {
+    setActiveItem(item);
+  };
+
   return (
     <div className="flex flex-col overflow-y-scroll bg-gray-900 w-full gap-1">
-      <div className="flex flex-row h-[30px] justify-evenly gap-2 overflow-x-auto mt-2">
+      <div className="flex flex-row h-[40px] justify-evenly gap-2 overflow-x-auto mt-2">
         <ArrowBackIosNew className="text-gray-400 text-sm" />
-        <span className="gap-1 flex cursor-pointer px-3">
+        <span
+          onClick={() => handleClick("NearBy")}
+          className={`gap-1 flex cursor-pointer px-3 ${
+            activeItem === "NearBy" ? "border-b-2 border-yellow-400" : ""
+          } focus:border-b-2 focus:border-yellow-400`}
+        >
           <SettingsInputAntenna className="text-yellow-400" />
           <span className="font-bold">NearBy</span>
         </span>
-        <span className="gap-1 flex cursor-pointer px-3">
+        <span
+          onClick={() => handleClick("Starred")}
+          className={`gap-1 flex cursor-pointer px-3 ${
+            activeItem === "Starred" ? "border-b-2 border-yellow-400" : ""
+          } focus:border-b-2 focus:border-yellow-400`}
+        >
           <AutoAwesome className="text-yellow-400" />
           <span className="font-bold">Starred</span>
         </span>
-        <span className="gap-1 flex cursor-pointer px-3">
+        <span
+          onClick={() => handleClick("Work")}
+          className={`gap-1 flex cursor-pointer px-3 ${
+            activeItem === "Work" ? "border-b-2 border-yellow-400" : ""
+          } focus:border-b-2 focus:border-yellow-400`}
+        >
           <Badge className="text-yellow-400" />
           <span className="font-bold">Work</span>
         </span>
-        <span className="gap-1 flex cursor-pointer px-3">
+        <span
+          onClick={() => handleClick("Home")}
+          className={`gap-1 flex cursor-pointer px-3 ${
+            activeItem === "Home" ? "border-b-2 border-yellow-400" : ""
+          } focus:border-b-2 focus:border-yellow-400`}
+        >
           <Deck className="text-yellow-400" />
           <span className="font-bold">Home</span>
         </span>
-        <span className="gap-1 flex cursor-pointer px-3">
+        <span
+          onClick={() => handleClick("Collection")}
+          className={`gap-1 flex cursor-pointer px-3 ${
+            activeItem === "Collection" ? "border-b-2 border-yellow-400" : ""
+          } focus:border-b-2 focus:border-yellow-400`}
+        >
           <Deck className="text-yellow-400" />
           <span className="font-bold">Collection</span>
         </span>
         <ArrowForwardIos className="text-gray-400 text-sm" />
       </div>
-      <div className="flex flex-row h-[20px] justify-evenly gap-2 overflow-x-auto mt-1">
+      <div className="flex flex-row h-[30px] items-center justify-evenly gap-2 overflow-x-auto mt-1">
         <span className="font-bold mr-3 text-sm">
           Range <span>(m)</span>:
         </span>
@@ -71,7 +102,7 @@ function Dash() {
       <hr />
 
       {/* Render buses */}
-      <div className=" bg-gray-800">
+      <div className="h-screen w-full bg-gray-800">
         <Collapsible
           trigger={
             <div
@@ -101,7 +132,9 @@ function Dash() {
                   <div className="flex px-3 w-full ">
                     <span className="flex flex-1 gap-2 text-sm items-center align-middle">
                       To: <span className="font-bold text-md"> {bus.to}</span>
-                      <span>(Ksh 60)</span>
+                      <span className="text-[12px]">
+                        (Ksh.{bus.calculateFare()})
+                      </span>
                     </span>
 
                     <span className="text-sm gap-1 flex">

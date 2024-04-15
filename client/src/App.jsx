@@ -10,6 +10,8 @@ import AppLayout from "./AppLayout";
 import Map from "./Map";
 import Stops from "./components/Stops";
 import Dash from "./components/Dash";
+import Search from "./components/Search";
+import P2P from "./components/P2P";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
                   <Route exact path="/" component={Dash} />
                   <Route exact path="/stops" component={Stops} />
                   <Route exact path="/map" component={Map} />
+                  <Route exact path="/search" component={Search} />
+                  <Route exact path="/ptop" component={P2P} />
                   {/*   <Route exact path="/classes">
                   <Classes openAddModal={openAddModal} />
                 </Route>

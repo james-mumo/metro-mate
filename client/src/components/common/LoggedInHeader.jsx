@@ -1,85 +1,93 @@
-import React from "react";
-import { AssistantDirectionRounded } from "@mui/icons-material";
-import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
-import { TroubleshootRounded } from "@mui/icons-material";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import { ShareLocation } from "@mui/icons-material";
-import { BusAlert, Explore } from "@mui/icons-material";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  DirectionsBus,
+  Explore,
+  ShareLocation,
+  Troubleshoot,
+  AssistantDirection,
+  BusAlert,
+} from "@mui/icons-material";
 
 const LoggedInHeader = () => {
-  const history = useHistory();
+  const [activeItem, setActiveItem] = useState("Home");
+  const location = useLocation();
 
-  const handleLogout = () => {
-    // Clear specific items from localStorage
-    localStorage.removeItem("user");
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("userType");
-
-    // Redirect to home page
-    // window.location.href = '/';
-    // window.location.reload();
-    history.push("/");
-  };
+  React.useEffect(() => {
+    const pathName = location.pathname;
+    const active = pathName.substring(pathName.lastIndexOf("/") + 1);
+    setActiveItem(active.charAt(0).toUpperCase() + active.slice(1));
+  }, [location.pathname]);
 
   return (
     <div className="bg-gray-900 text-white py-0 flex justify-between items-center px-0">
       <nav className="flex-1 flex items-center justify-start py-0">
         <ul className="flex justify-evenly flex-row items-stretch flex-1">
           <li className="flex flex-col">
-            <a
-              href="/"
-              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
+            <Link
+              to="/"
+              className={`hover:text-gray-200 cursor-pointer transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 ${
+                activeItem === "Home" ? "text-yellow-400" : "text-gray-200"
+              }`}
             >
-              <DirectionsBusIcon className="mr-0 text-gray-200" />
+              <DirectionsBus className="mr-0" />
               Home
-            </a>
+            </Link>
           </li>
           <li className="flex flex-col">
-            <a
-              href="/map"
-              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
+            <Link
+              to="/map"
+              className={`hover:text-gray-200 cursor-pointer transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 ${
+                activeItem === "Map" ? "text-yellow-400" : "text-gray-200"
+              }`}
             >
-              <Explore className="mr-0 text-gray-200" />
+              <Explore className="mr-0" />
               Map
-            </a>
+            </Link>
           </li>
           <li className="flex flex-col">
             <Link
               to="/stops"
-              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
+              className={`hover:text-gray-200 cursor-pointer transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 ${
+                activeItem === "Stops" ? "text-yellow-400" : "text-gray-200"
+              }`}
             >
-              <ShareLocation className="mr-0 text-gray-200" />
+              <ShareLocation className="mr-0" />
               Stops
             </Link>
           </li>
           <li className="flex flex-col">
-            <a
-              href="#"
-              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
+            <Link
+              to="/search"
+              className={`hover:text-gray-200 cursor-pointer transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 ${
+                activeItem === "Search" ? "text-yellow-400" : "text-gray-200"
+              }`}
             >
-              <TroubleshootRounded className="mr-0 text-gray-200" />
+              <Troubleshoot className="mr-0" />
               Search
-            </a>
+            </Link>
           </li>
           <li className="flex flex-col">
-            <a
-              href="#"
-              className="hover:text-gray-200 cursor-pointer hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 text-gray-200"
+            <Link
+              to="/ptop"
+              className={`hover:text-gray-200 cursor-pointer transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 ${
+                activeItem === "Ptop" ? "text-yellow-400" : "text-gray-200"
+              }`}
             >
-              <AssistantDirectionRounded className="mr-0 text-gray-200" />
+              <AssistantDirection className="mr-0" />
               P2P
-            </a>
+            </Link>
           </li>
           <li className="flex flex-col">
-            <a
-              onClick={handleLogout}
-              className="hover:text-gray-200 cursor-point hover:bg-teal-900 transition duration-300 p-1 rounded-md flex items-center flex-col text-gray-200"
+            <Link
+              to="/notice"
+              className={`hover:text-gray-200 cursor-pointer transition duration-300 p-1 rounded-md flex items-center flex-col ${
+                activeItem === "Notice" ? "text-yellow-400" : "text-gray-200"
+              }`}
             >
-              <BusAlert className="mr-0 text-gray-200" />
+              <BusAlert className="mr-0" />
               Notice
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

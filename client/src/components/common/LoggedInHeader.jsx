@@ -47,13 +47,13 @@ const LoggedInHeader = () => {
           </li>
           <li className="flex flex-col">
             <Link
-              to="/stops"
+              to="/summ"
               className={`hover:text-gray-200 cursor-pointer transition duration-300 p-1 rounded-md flex items-center flex-col gap-0 ${
-                activeItem === "Stops" ? "text-yellow-400" : "text-gray-200"
+                activeItem === "Summ" ? "text-yellow-400" : "text-gray-200"
               }`}
             >
               <ShareLocation className="mr-0" />
-              Stops
+              Summ
             </Link>
           </li>
           <li className="flex flex-col">

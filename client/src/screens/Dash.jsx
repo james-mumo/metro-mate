@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Modal from "./Modal";
 
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import Collapsible from "react-collapsible";
@@ -13,6 +14,17 @@ import {
 import { useBuses, useRoutes } from "../utils/api";
 
 function Dash() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBus, setSelectedBus] = useState(null); // State to store selected bus details
+
+  const handleBusItemClick = (bus) => {
+    setSelectedBus(bus);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleCollapsible = () => {
@@ -157,6 +169,7 @@ function Dash() {
                 <li
                   key={bus.id}
                   className="rounded-md flex gap-2 w-full cursor-pointer bg-gray-700"
+                  onClick={() => handleBusItemClick(bus)}
                 >
                   <span className="text-yellow-400 p-2 font-bold items-center flex align-middle text-lg">
                     {bus.busNo}
@@ -199,6 +212,15 @@ function Dash() {
           </ul>
         </Collapsible>
       </div>
+
+      {/* Render Modal */}
+      {selectedBus && (
+        <Modal
+          isOpen={true}
+          onClose={() => setSelectedBus(null)}
+          bus={selectedBus}
+        />
+      )}
     </div>
   );
 }

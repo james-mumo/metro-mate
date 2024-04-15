@@ -56,18 +56,34 @@ function ListRoutes() {
                 </div>
               </div>
               <h3>Buses on this route:</h3>
-              <div>
+              <div className="gap-2 flex flex-col border border-yellow-300 px-2 rounded-sm border-opacity-35">
                 {filteredBuses.length > 0 ? (
                   filteredBuses.map((bus) => (
                     <div key={bus.id} className="flex flex-col">
-                      <span>
-                        Bus {bus.busNo} at {bus.currentLocation} towards{" "}
-                        {bus.to}{" "}
-                      </span>
-                      <span>
-                        {bus.distanceToCurrentLocation} km Away (
-                        {bus.timeToCurrentLocation} mins),
-                        <span className="ml-4">{bus.capacity} Seater</span>
+                      <span className="flex ">
+                        <span className="flex flex-col flex-1">
+                          <div className="text-sm text-gray-300">
+                            {bus.sacco} {bus.busNo}
+                          </div>
+                          <span className="text-sm font-semibold text-yellow-300 opacity-80">
+                            {bus.numberPlate}
+                          </span>
+                        </span>
+
+                        <span className="flex flex-col text-sm">
+                          <span className="flex items-center align-middle gap-1">
+                            <span className="text-sm font-semibold">At</span>
+                            {bus.currentLocation} {">"} {bus.to}
+                          </span>
+
+                          <span>
+                            {bus.distanceToCurrentLocation} km (
+                            {bus.timeToCurrentLocation} mins),
+                            <span className="ml-2 text-emerald-400 font-semibold">
+                              {bus.capacity} Seater
+                            </span>
+                          </span>
+                        </span>
                       </span>
                     </div>
                   ))

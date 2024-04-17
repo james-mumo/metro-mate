@@ -15,7 +15,7 @@ import { useBuses, useRoutes } from "../utils/api";
 
 function Dash() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedBus, setSelectedBus] = useState(null); // State to store selected bus details
+  const [selectedBus, setSelectedBus] = useState(null); 
 
   const handleBusItemClick = (bus) => {
     setSelectedBus(bus);

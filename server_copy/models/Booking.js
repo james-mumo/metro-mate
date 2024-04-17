@@ -2,15 +2,14 @@ import mongoose from "mongoose";
 import Bus from "./Bus.js";
 
 const bookingSchema = new mongoose.Schema({
+  passengerName: String,
+  paid: {
+    type: Boolean,
+    default: false,
+  },
   amountPaid: {
     type: Number,
     default: 0,
-  },
-  isPaid: {
-    type: Boolean,
-  },
-  bookingCode: {
-    type: String,
   },
   paymentDate: {
     type: Date,

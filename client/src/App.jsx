@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppLayout from "./AppLayout";
@@ -8,7 +7,10 @@ import Dash from "./screens/Dash";
 import Search from "./screens/Search";
 import Notice from "./screens/Notice";
 import P2P from "./components/P2P";
-import Modal from "./screens/Modal"; // Import Modal component
+import Modal from "./screens/Modal";
+
+
+
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,8 +39,7 @@ function App() {
           </Switch>
         </Router>
 
-        {/* Render the Modal component */}
-        <Modal isOpen={isModalOpen} onClose={closeModal} />
+                <Modal isOpen={isModalOpen} onClose={closeModal} />
       </div>
     </div>
   );

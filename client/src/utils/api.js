@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 const backend_uri = "http://localhost:4000/api/";
 
+export const stk_endpoint = `${backend_uri}stkpush`;
+export const book_endpoint = `${backend_uri}book`;
+
 export const useBuses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

@@ -43,62 +43,7 @@ router.get("/access_token", (req, res) => {
 
 //MPESA STK PUSH ROUTE
 // remeber to push the localhost to ngrok
-// router.get("/stkpush", (req, res) => {
-//   getAccessToken()
-//     .then((accessToken) => {
-//       const url =
-//         "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
-//       const auth = "Bearer " + accessToken;
-//       const timestamp = moment().format("YYYYMMDDHHmmss");
-//       const password = new Buffer.from(
-//         "174379" +
-//           "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" +
-//           timestamp
-//       ).toString("base64");
-
-//       axios
-//         .post(
-//           url,
-//           {
-//             BusinessShortCode: "174379",
-//             Password: password,
-//             Timestamp: timestamp,
-//             TransactionType: "CustomerPayBillOnline",
-//             Amount: "1",
-//             PartyA: "254743376820", //phone number to receive the stk push
-//             PartyB: "174379",
-//             PhoneNumber: "254743376820",
-//             CallBackURL: "https://52d4-196-216-86-88.ngrok-free.app",
-//             AccountReference: "MetroMate",
-//             TransactionDesc:
-//               "Kindly lipa the right fare, na ushow dondaa message.",
-//           },
-//           {
-//             headers: {
-//               Authorization: auth,
-//             },
-//           }
-//         )
-//         .then((response) => {
-//           res.send(
-//             "😀 Request is successful done ✔✔. Please enter mpesa pin to complete the transaction"
-//           );
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//           res.status(500).send("❌ Request failed");
-//         });
-//     })
-//     .catch(console.log);
-// });
-
-router.post("/stkpush", (req, res) => {
-  const { phoneNumber } = req.body; // Extract phone number from request body
-  console.log(phoneNumber);
-  if (!phoneNumber) {
-    return res.status(400).send("Phone number is required");
-  }
-
+router.get("/stkpush", (req, res) => {
   getAccessToken()
     .then((accessToken) => {
       const url =
@@ -120,10 +65,10 @@ router.post("/stkpush", (req, res) => {
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
             Amount: "1",
-            PartyA: phoneNumber, // Use the phone number from the request body
+            PartyA: "254743376820", //phone number to receive the stk push
             PartyB: "174379",
-            PhoneNumber: phoneNumber, // Use the phone number from the request body
-            CallBackURL: "https://f198-196-216-86-88.ngrok-free.app",
+            PhoneNumber: "254743376820",
+            CallBackURL: "https://52d4-196-216-86-88.ngrok-free.app",
             AccountReference: "MetroMate",
             TransactionDesc:
               "Kindly lipa the right fare, na ushow dondaa message.",
@@ -140,7 +85,7 @@ router.post("/stkpush", (req, res) => {
           );
         })
         .catch((error) => {
-          // console.log(error);
+          console.log(error);
           res.status(500).send("❌ Request failed");
         });
     })

@@ -12,11 +12,13 @@ import { FaGithub } from "react-icons/fa6";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import BusLocation from "../components/settings/BusLocation";
 import AddRoadNotifications from "../components/settings/AddRoadNotifications";
+import UserDetails from "../UserDetails";
 
 function Settings() {
   const [isLocationModalOpen, setLocationModalOpen] = useState(false);
   const [isBusLocationModalOpen, setBusLocationModalOpen] = useState(false);
   const [isRoadAlertModalOpen, setRoadAlertModalOpen] = useState(false);
+  const [isCustomizeModalOpen, setCustomizeModalOpen] = useState(false);
 
   const handleRoadAlertModalToggle = () => {
     setRoadAlertModalOpen(!isRoadAlertModalOpen);
@@ -30,10 +32,15 @@ function Settings() {
     setBusLocationModalOpen(!isBusLocationModalOpen);
   };
 
+  const handleCustomizeModalToggle = () => {
+    setCustomizeModalOpen(!isCustomizeModalOpen);
+  };
+
   const handleCloseModal = () => {
     setLocationModalOpen(false);
     setBusLocationModalOpen(false);
     setRoadAlertModalOpen(false);
+    setCustomizeModalOpen(false);
   };
 
   return (
@@ -122,7 +129,10 @@ function Settings() {
           <span className="text-sm opacity-80">View App Details</span>
         </div>
       </div>
-      <div className="flex items-center py-2 px-4 text-white cursor-pointer hover:bg-slate-900">
+      <div
+        className="flex items-center py-2 px-4 text-white cursor-pointer hover:bg-slate-900"
+        onClick={handleCustomizeModalToggle}
+      >
         <div className="bg-teal-500 rounded-full p-2">
           <LuLaugh className="text-white text-3xl" />
         </div>
@@ -172,6 +182,7 @@ function Settings() {
       </div>
       {(isLocationModalOpen ||
         isBusLocationModalOpen ||
+        isCustomizeModalOpen ||
         isRoadAlertModalOpen) && (
         <button
           className="absolute top-4 right-4 text-white rounded-sm z-20 p-2 bg-gray-700 hover:bg-gray-600"
@@ -194,6 +205,12 @@ function Settings() {
       {isRoadAlertModalOpen && (
         <div className="absolute top-0 left-0 w-full h-full bg-gray-800 bg-opacity-90 flex items-center justify-center">
           <AddRoadNotifications />
+        </div>
+      )}
+
+      {isCustomizeModalOpen && (
+        <div className="absolute top-0 left-0 w-full h-full bg-gray-800 bg-opacity-90 flex items-center justify-center">
+          <UserDetails />
         </div>
       )}
     </div>

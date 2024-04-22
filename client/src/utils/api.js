@@ -1,9 +1,37 @@
 import React, { useState, useEffect } from "react";
 
-const backend_uri = "http://localhost:4000/api/";
+export const backend_uri = "http://localhost:4000/api/";
 
 export const stk_endpoint = `${backend_uri}stkpush`;
 export const book_endpoint = `${backend_uri}book`;
+export const bookings_endpoint = `${backend_uri}bookings`;
+
+export const useBookings = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const response = await fetch(bookings_endpoint);
+        if (!response.ok) {
+          throw new Error("Failed to fetch bookings");
+        }
+        const data = await response.json();
+        setBookings(data.bookings);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchBookings();
+  }, []);
+
+  return { loading, error, bookings };
+};
 
 export const useBuses = () => {
   const [loading, setLoading] = useState(true);
@@ -94,4 +122,32 @@ export const useRoutes = () => {
   }, []);
 
   return { loading, error, routes };
+};
+
+export const useNotifications = () => {
+  const [nloading, setLoading] = useState(true);
+  const [nerror, setError] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetch(`${backend_uri}notifications`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch notifications");
+        }
+        const data = await response.json();
+        setNotifications(data);
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
+
+  return { nloading, nerror, notifications };
 };

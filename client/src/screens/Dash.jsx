@@ -15,7 +15,7 @@ import { useBuses, useRoutes } from "../utils/api";
 
 function Dash() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedBus, setSelectedBus] = useState(null); 
+  const [selectedBus, setSelectedBus] = useState(null);
 
   const handleBusItemClick = (bus) => {
     setSelectedBus(bus);
@@ -146,9 +146,13 @@ function Dash() {
             {buses.map((bus) => {
               const calculateFare = () => {
                 let totalFare = 0;
-                const route = routes.find((route) => route.id === bus.routeId);
+                const route = routes.find(
+                  (route) => route._id === bus.routeId._id
+                );
                 if (!route) {
-                  throw new Error(`Route with ID ${bus.routeId} not found.`);
+                  throw new Error(
+                    `Route with ID ${bus.routeId._id} not found.`
+                  );
                 }
                 const currentStageIndex = route.stages.findIndex(
                   (stage) => stage.name === bus.currentLocation

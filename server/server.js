@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import routeRoutes from "./routes/routeRoutes.js";
 import busRoutes from "./routes/busRoutes.js";
 import bookingRouter from "./routes/bookingRouter.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use("/api/routes", routeRoutes);
 app.use("/api/buses", busRoutes);
 app.use("/api", bookingRouter);
+app.use("/api/notifications", notificationRoutes);
 
 // MongoDB connection
 const uri = `mongodb+srv://98kithome:98kithome@cluster0.ijx96ju.mongodb.net/metro_mate`;
@@ -47,7 +49,15 @@ mongoose
 
 // Define routes
 app.get("/", (req, res) => {
-  res.send("metro_mate backend seems to be running");
-  const timeStamp = moment().format("YYYYMMDDHHmmss");
-  console.log(timeStamp);
+  res.send({
+    allBookings: "http://localhost:4000/api/bookings",
+    deleteBookings: "http://localhost:4000/api/delete",
+    allRoutes: "http://localhost:4000/api/routes/",
+    allBuses: "http://localhost:4000/api/buses/",
+    add_Buses: "http://localhost:4000/api/buses/add",
+    delete_Buses: "http://localhost:4000/api/buses/delete",
+    getNotifs: "http://localhost:4000/api/notifications",
+    addNotifs: "http://localhost:4000/api/notifications/add",
+    deleteAllNotifs: "http://localhost:4000/api/notifications/deleteAll",
+  });
 });

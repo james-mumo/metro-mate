@@ -5,9 +5,51 @@ import Booking from "../models/Booking.js";
 
 const router = express.Router();
 
+// Route to get all bookings
+router.get("/bookings", async (req, res) => {
+  try {
+    const bookings = await Booking.find().populate("busDetails");
+    const totalItems = bookings.length;
+
+    res.status(200).json({
+      success: true,
+      message: "Successfully retrieved all bookings",
+      totalItems: totalItems,
+      bookings: bookings,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve bookings",
+      error: error.message,
+    });
+  }
+});
+
+// Route to delete all bookings
+router.get("/delete", async (req, res) => {
+  try {
+    await Booking.deleteMany(); // Delete all bookings
+    res.status(200).json({
+      success: true,
+      message: "All bookings deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete all bookings",
+      error: error.message,
+    });
+  }
+});
 router.post("/book", async (req, res) => {
   try {
-    const { amount, busInfo, ...rest } = req.body;
+    // Convert amount to a number
+    const amount = Number(req.body.amount);
+
+    const { busInfo, ...rest } = req.body;
 
     // Generate booking code
     const busNumberPlate = busInfo.numberPlate; // Assuming numberPlate is the field containing the bus number plate
@@ -28,27 +70,13 @@ router.post("/book", async (req, res) => {
       ...rest,
     });
 
-    // Middleware to update capacity when a booking is made
-    const bus = await Bus.findById(busInfo._id);
-    if (bus) {
-      bus.capacity -= 1;
-      await bus.save();
-    }
+    // Save the booking to the database
+    const savedBooking = await booking.save();
 
-    await booking.save();
-
-    res.status(201).json({
-      success: true,
-      message: "Booking created successfully",
-      booking: booking,
-    });
+    res.json(savedBooking);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to create booking",
-      error: error.message,
-    });
+    console.error("Error booking:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

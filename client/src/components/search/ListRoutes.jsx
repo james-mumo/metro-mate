@@ -27,7 +27,9 @@ function ListRoutes() {
           );
 
           // Filter buses for this route
-          const filteredBuses = buses.filter((bus) => bus.routeId === route.id);
+          const filteredBuses = buses.filter(
+            (bus) => bus.routeId._id === route._id
+          );
 
           return (
             <div

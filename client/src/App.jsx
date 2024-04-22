@@ -8,9 +8,7 @@ import Search from "./screens/Search";
 import Notice from "./screens/Notice";
 import P2P from "./components/P2P";
 import Modal from "./screens/Modal";
-
-
-
+import Settings from "./screens/Settings";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,19 +25,21 @@ function App() {
             <Route path="/">
               <AppLayout>
                 <Switch>
+                  <Route exact path="/" component={Dash} />
                   <Route exact path="/home" component={Dash} />
                   <Route exact path="/summ" component={Stops} />
                   <Route exact path="/map" component={Map} />
                   <Route exact path="/search" component={Search} />
                   <Route exact path="/ptop" component={P2P} />
                   <Route exact path="/notice" component={Notice} />
+                  <Route exact path="/settings" component={Settings} />
                 </Switch>
               </AppLayout>
             </Route>
           </Switch>
         </Router>
 
-                <Modal isOpen={isModalOpen} onClose={closeModal} />
+        <Modal isOpen={isModalOpen} onClose={closeModal} />
       </div>
     </div>
   );

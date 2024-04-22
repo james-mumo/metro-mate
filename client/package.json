@@ -2,6 +2,7 @@
   "name": "client",
   "private": true,
   "version": "0.0.0",
+  "license": "GPL-3.0-or-later",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -21,6 +22,7 @@
     "@mui/x-date-pickers": "^6.19.5",
     "axios": "^1.6.7",
     "leaflet": "^1.9.4",
+    "leaflet-geosearch": "^3.11.1",
     "react": "^18.2.0",
     "react-collapsible": "^2.10.0",
     "react-dom": "^18.1.0",

@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const busSchema = new mongoose.Schema({
   id: Number,
   busNo: String,
-  routeId: Number,
+  routeId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Route", // Reference to the Route model
+  },
   to: String,
   currentLocation: String,
   distanceToCurrentLocation: Number,

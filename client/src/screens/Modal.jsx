@@ -29,7 +29,7 @@ function Modal({ isOpen, onClose, bus }) {
       return "Loading..."; // Return loading message if routes are still loading or error occurred
     }
     let totalFare = 0;
-    const route = routes.find((route) => route.id === bus.routeId);
+    const route = routes.find((route) => route._id === bus.routeId._id);
     if (!route) {
       throw new Error(`Route with ID ${bus.routeId} not found.`);
     }

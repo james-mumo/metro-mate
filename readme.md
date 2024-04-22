@@ -52,3 +52,11 @@ today we show parking and dirextions in map
 then we add wallet
 
 finish with notifications
+
+---
+
+pifile mangment
+
+add payment and wallet
+
+parking and current location and map

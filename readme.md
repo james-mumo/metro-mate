@@ -1,3 +1,1 @@
-add payment and wallet
-
-parking and current location and map
+add the ngrok to daraja website and also the callback part in the stkpush route

@@ -2,8 +2,19 @@ import express from "express";
 import axios from "axios";
 import moment from "moment";
 import fs from "fs";
+import AfricasTalking from "africastalking";
 
 const router = express.Router();
+
+// Initialize AfricasTalking with your credentials
+const credentials = {
+  apiKey: "894aafd0ca327ca28cb32e6de7a8f07ecd5f0959ec5387b1df46bf93128872f9",
+  username: "TheCoolestApp123",
+};
+const africasTalking = AfricasTalking(credentials);
+
+// Initialize a service e.g. SMS
+const sms = africasTalking.SMS;
 
 async function getAccessToken() {
   const consumer_key = "Q5T3lisA60dPGN4zQpBjGrxgrPhw1KgKejT1VYiv8bMAVnkE";
@@ -62,11 +73,11 @@ router.post("/stkpush", (req, res) => {
             Password: password,
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
-            Amount: amount, // Use the amount received from frontend
+            Amount: amount,
             PartyA: 254743376820,
             PartyB: "174379",
-            PhoneNumber: phoneNumber, // Use the phoneNumber received from frontend
-            CallBackURL: "https://5357-196-216-86-88.ngrok-free.app/callback",
+            PhoneNumber: phoneNumber,
+            CallBackURL: "https://4bd9-196-216-86-88.ngrok-free.app/callback",
             AccountReference: "Metro Mate",
             TransactionDesc: "Mpesa Daraja API stk push test",
           },
@@ -77,6 +88,11 @@ router.post("/stkpush", (req, res) => {
           }
         )
         .then((response) => {
+          // If STK push is successful, send SMS
+          sendSMS(
+            phoneNumber,
+            "Kindly Show Message Metro Mate Operator! You are now officialy cool for Travelling With Us : )"
+          );
           res.send(
             "😀 Request is successful done ✔✔. Please enter mpesa pin to complete the transaction"
           );
@@ -88,6 +104,29 @@ router.post("/stkpush", (req, res) => {
     })
     .catch(console.log);
 });
+
+function sendSMS(phoneNumber, message) {
+  // Check if phone number starts with "+", if not, add it
+  if (!phoneNumber.startsWith("+")) {
+    phoneNumber = "+" + phoneNumber;
+  }
+
+  // Prepare options for sending SMS
+  const options = {
+    to: [phoneNumber], // Array of phone numbers
+    message: message,
+  };
+
+  // Send message and capture the response or error
+  sms
+    .send(options)
+    .then((response) => {
+      console.log("SMS sent successfully:", response);
+    })
+    .catch((error) => {
+      console.error("Failed to send SMS:", error);
+    });
+}
 
 router.post("/callback", (req, res) => {
   console.log("STK PUSH CALLBACK");

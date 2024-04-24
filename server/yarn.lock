@@ -2,6 +2,44 @@
 # yarn lockfile v1
 
 
+"@hapi/address@^2.1.2":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
+  integrity sha512-QD1PhQk+s31P1ixsX0H0Suoupp3VMXzIVMSwobR3F3MSUO2YCV0B7xqLcUw/Bh8yuvd3LhpyqLQWTNcRmp6IdQ==
+
+"@hapi/formula@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@hapi/formula/-/formula-1.2.0.tgz#994649c7fea1a90b91a0a1e6d983523f680e10cd"
+  integrity sha512-UFbtbGPjstz0eWHb+ga/GM3Z9EzqKXFWIbSOFURU0A/Gku0Bky4bCk9/h//K2Xr3IrCfjFNhMm4jyZ5dbCewGA==
+
+"@hapi/hoek@^8.2.4", "@hapi/hoek@^8.3.0":
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-8.5.1.tgz#fde96064ca446dec8c55a8c2f130957b070c6e06"
+  integrity sha512-yN7kbciD87WzLGc5539Tn0sApjyiGHAJgKvG9W8C7O+6c7qmoQMfVs0W4bX17eqz6C78QJqqFrtgdK5EWf6Qow==
+
+"@hapi/joi@^16.1.7":
+  version "16.1.8"
+  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-16.1.8.tgz#84c1f126269489871ad4e2decc786e0adef06839"
+  integrity sha512-wAsVvTPe+FwSrsAurNt5vkg3zo+TblvC5Bb1zMVK6SJzZqw9UrJnexxR+76cpePmtUZKHAPxcQ2Bf7oVHyahhg==
+  dependencies:
+    "@hapi/address" "^2.1.2"
+    "@hapi/formula" "^1.2.0"
+    "@hapi/hoek" "^8.2.4"
+    "@hapi/pinpoint" "^1.0.2"
+    "@hapi/topo" "^3.1.3"
+
+"@hapi/pinpoint@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@hapi/pinpoint/-/pinpoint-1.0.2.tgz#025b7a36dbbf4d35bf1acd071c26b20ef41e0d13"
+  integrity sha512-dtXC/WkZBfC5vxscazuiJ6iq4j9oNx1SHknmIr8hofarpKUZKmlUVYVIhNVzIEgK5Wrc4GMHL5lZtt1uS2flmQ==
+
+"@hapi/topo@^3.1.3":
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/@hapi/topo/-/topo-3.1.6.tgz#68d935fa3eae7fdd5ab0d7f953f3205d8b2bfc29"
+  integrity sha512-tAag0jEcjwH+P2quUfipd7liWCNX2F8NvYjQp2wtInsZxnMlypdw0FtAOLxtvvkO+GSRRbmNi8m/5y42PQJYCQ==
+  dependencies:
+    "@hapi/hoek" "^8.3.0"
+
 "@mongodb-js/saslprep@^1.1.5":
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/@mongodb-js/saslprep/-/saslprep-1.1.5.tgz#0c48a96c8d799e81fae311b7251aa5c1dc7c6e95"
@@ -34,6 +72,20 @@ accepts@~1.3.8:
     mime-types "~2.1.34"
     negotiator "0.6.3"
 
+africastalking@^0.6.7:
+  version "0.6.7"
+  resolved "https://registry.yarnpkg.com/africastalking/-/africastalking-0.6.7.tgz#5560cf237fd837c321059f6989ad7bc34084ad09"
+  integrity sha512-CJxJaK0NSzhT3SRbc9Fx3I61AKpW71JeXVsQc8zzV7AZgw0aOlJbggsYlbhCwvjWbzAKa8GEkA+MPTxcW6tptw==
+  dependencies:
+    "@hapi/joi" "^16.1.7"
+    axios "^1.6.2"
+    body-parser "^1.20.2"
+    dotenv "^16.3.1"
+    google-libphonenumber "^3.2.33"
+    lodash "^4.17.21"
+    querystring "^0.2.0"
+    validate.js "^0.13.1"
+
 anymatch@~3.1.2:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/anymatch/-/anymatch-3.1.3.tgz#790c58b19ba1720a84205b57c618d5ad8524973e"
@@ -52,7 +104,7 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-axios@^1.6.8:
+axios@^1.6.2, axios@^1.6.8:
   version "1.6.8"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.8.tgz#66d294951f5d988a00e87a0ffb955316a619ea66"
   integrity sha512-v/ZHtJDU39mDpyBoFVkETcd/uNdxrWRrg3bKpOKzXFA6Bvqopts6ALSMU3y6ijYxbw2B+wPrIv46egTzJXCLGQ==
@@ -71,7 +123,7 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.3.0.tgz#f6e14a97858d327252200242d4ccfe522c445522"
   integrity sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==
 
-body-parser@1.20.2:
+body-parser@1.20.2, body-parser@^1.20.2:
   version "1.20.2"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.20.2.tgz#6feb0e21c4724d06de7ff38da36dad4f57a747fd"
   integrity sha512-ml9pReCu3M61kGlqoTm2umSXTlRTuGTx0bfYj+uIUKKYycG5NtSbeetV3faSU6R7ajOPw0g/J1PvK4qNy7s5bA==
@@ -220,7 +272,7 @@ destroy@1.2.0:
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.2.0.tgz#4803735509ad8be552934c67df614f94e66fa015"
   integrity sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==
 
-dotenv@^16.4.5:
+dotenv@^16.3.1, dotenv@^16.4.5:
   version "16.4.5"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.4.5.tgz#cdd3b3b604cb327e286b4762e13502f717cb099f"
   integrity sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==
@@ -371,6 +423,11 @@ glob-parent@~5.1.2:
   dependencies:
     is-glob "^4.0.1"
 
+google-libphonenumber@^3.2.33:
+  version "3.2.34"
+  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.2.34.tgz#ef29b53be0f9fb517aaa53d26a541150f86ec921"
+  integrity sha512-CLwkp0lZvMywh6dCh0T3Fm8XsfJhLAupc8AECwYkJNQBPW8wQPrv/tV0oFKCs8FMw+pTQyNPZoycgBzYjqtTZQ==
+
 gopd@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/gopd/-/gopd-1.0.1.tgz#29ff76de69dac7489b7c0918a5788e56477c332c"
@@ -468,6 +525,11 @@ kareem@2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.6.3.tgz#23168ec8ffb6c1abfd31b7169a6fb1dd285992ac"
   integrity sha512-C3iHfuGUXK2u8/ipq9LfjFfXFxAZMQJJq7vLS45r3D9Y2xQ/m4S8zaR4zMLFWh9AsNPXmcFfUDhTEO8UIC/V6Q==
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 lru-cache@^6.0.0:
   version "6.0.0"
@@ -677,6 +739,11 @@ qs@6.11.0:
   dependencies:
     side-channel "^1.0.4"
 
+querystring@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.1.tgz#40d77615bb09d16902a85c3e38aa8b5ed761c2dd"
+  integrity sha512-wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg==
+
 range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
@@ -851,6 +918,11 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
+
+validate.js@^0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/validate.js/-/validate.js-0.13.1.tgz#b58bfac04a0f600a340f62e5227e70d95971e92a"
+  integrity sha512-PnFM3xiZ+kYmLyTiMgTYmU7ZHkjBZz2/+F0DaALc/uUtVzdCt1wAosvYJ5hFQi/hz8O4zb52FQhHZRC+uVkJ+g==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"

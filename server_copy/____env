@@ -1,4 +1,0 @@
-const CONSUMER_KEY=Q5T3lisA60dPGN4zQpBjGrxgrPhw1KgKejT1VYiv8bMAVnkE
-const CONSUMER_SECRET=cwGWMYGqUOxbe5akP6GTZLIIR7vIVUxGfw4qjc9JtOAUJMTHdB5tVS5z09CGqsJQ
-const MPESA_API_URL= 
-const MONGO_URI=mongodb+srv://98kithome:98kithome@cluster0.ijx96ju.mongodb.net/metro_mate

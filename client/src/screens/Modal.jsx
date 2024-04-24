@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { book_endpoint, stk_endpoint, useRoutes } from "../utils/api";
+import {
+  backend_uri,
+  book_endpoint,
+  stk_endpoint,
+  useRoutes,
+} from "../utils/api";
 import { Paid } from "@mui/icons-material";
 import { Loupe } from "@mui/icons-material";
 import m_pesa from "../assets/MPESA.png";
@@ -92,18 +97,16 @@ function Modal({ isOpen, onClose, bus }) {
     const formattedPhoneNumber = phoneNumber.replace(/^0/, "254");
 
     axios
-      .post(book_endpoint, {
-        phoneNumber: formattedPhoneNumber,
+      .post(`${backend_uri}stkpush`, {
         amount: calculateFare(),
-        busInfo: bus,
-        isPaid: false,
+        phoneNumber: formattedPhoneNumber,
       })
       .then((response) => {
         // Handle success
         console.log(response.data);
         onClose(false);
         setLoadingPayment(false); // Reset loading state
-        toast.success("Payment successful! Thank you for your purchase.");
+        toast.success("STK Push Successfully Sent!");
       })
       .catch((error) => {
         // Handle errors

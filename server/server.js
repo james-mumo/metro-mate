@@ -10,6 +10,7 @@ import busRoutes from "./routes/busRoutes.js";
 import bookingRouter from "./routes/bookingRouter.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import mpesaRoutes from "./mpesa.js";
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use("/api/buses", busRoutes);
 app.use("/api", bookingRouter);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api", mpesaRoutes);
 
 // MongoDB connection
 const uri = `mongodb+srv://98kithome:98kithome@cluster0.ijx96ju.mongodb.net/metro_mate`;

@@ -144,15 +144,13 @@ function Dash() {
         >
           <ul className="bg-gray-800 flex flex-col gap-2 px-1">
             {buses.map((bus) => {
+              console.log(bus);
+              console.log(routes);
               const calculateFare = () => {
                 let totalFare = 0;
-                const route = routes.find(
-                  (route) => route._id === bus.routeId._id
-                );
+                const route = routes.find((route) => route.id === bus.id);
                 if (!route) {
-                  throw new Error(
-                    `Route with ID ${bus.routeId._id} not found.`
-                  );
+                  throw new Error(`Route with ID ${bus.id} not found.`);
                 }
                 const currentStageIndex = route.stages.findIndex(
                   (stage) => stage.name === bus.currentLocation

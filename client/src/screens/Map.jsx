@@ -28,6 +28,17 @@ function Map() {
 
   return (
     <div className="theeApp">
+      <span className="flex bg-slate-800">
+        <a
+          href="http://localhost:5174"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline cursor-pointer bg-slate-700 bg-opacity-80 font-semibold text-white hover:text-white"
+        >
+          See More
+        </a>
+      </span>
+
       <MapContainer
         className="map"
         center={

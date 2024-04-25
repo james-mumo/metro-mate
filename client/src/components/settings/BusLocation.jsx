@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { backend_uri, useBuses } from "../../utils/api";
+import { backend_uri, useBuses, useRoutes } from "../../utils/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 function BusLocation() {
   const { loading, error, buses } = useBuses(); // Get buses data using the hook
+  const { loading: routesLoading, error: routesError, routes } = useRoutes();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBuses, setFilteredBuses] = useState([]);
@@ -79,39 +80,47 @@ function BusLocation() {
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {!selectedBus &&
-        busesToDisplay.map((bus) => (
-          <div
-            key={bus._id}
-            className="border-b border-gray-300 py-4 bg-slate-700 rounded-sm px-2 mb-2"
-          >
-            <div className="flex align-middle">
-              <div className="flex flex-col flex-1">
-                <span className="text-sm text-emerald-300 font-semibold flex">
-                  {bus.busNo}, {bus.numberPlate}
-                </span>
-                <span className="text-teal-300 text-sm font-semibold">
-                  Sacco: {bus.sacco}
-                </span>
-              </div>
-              <div className="flex text-sm  flex-col font-semibold">
-                {bus.routeId.name}
-                <p className="text-emerald-400">To: {bus.to}</p>
-              </div>
-            </div>
+        busesToDisplay.map((bus) => {
+          const route = routes.find((route) => route.id === bus.id);
 
-            <p className="text-teal-100">Capacity: {bus.capacity}</p>
-            <span className="text-teal-100 text-sm font-semibold">
-              Current Location: {bus.currentLocation}
-            </span>
-
-            <button
-              onClick={() => handleBusSelect(bus)}
-              className="mt-4 px-4 py-0 rounded-sm w-full outline-none focus:normal-nums bg-teal-500 text-white hover:bg-teal-600 focus:outline-none focus:bg-teal-600"
+          return (
+            <div
+              key={bus._id}
+              className="border-b border-gray-300 py-4 bg-slate-700 rounded-sm px-2 mb-2"
             >
-              Select Bus
-            </button>
-          </div>
-        ))}
+              <div className="flex align-middle">
+                <div className="flex flex-col flex-1">
+                  <span className="text-sm text-emerald-300 font-semibold flex">
+                    {bus.busNo}, {bus.numberPlate}
+                  </span>
+                  <span className="text-teal-300 text-sm font-semibold">
+                    Sacco: {bus.sacco}
+                  </span>
+                </div>
+                <div className="flex text-sm  flex-col font-semibold">
+                  {route ? (
+                    <p className="text-emerald-400">To: {route.name}</p>
+                  ) : (
+                    <p className="text-emerald-400">Route: N/A</p>
+                  )}
+                </div>
+              </div>
+
+              <p className="text-teal-100">Capacity: {bus.capacity}</p>
+              <span className="text-teal-100 text-sm font-semibold">
+                Current Location: {bus.currentLocation}
+              </span>
+
+              <button
+                onClick={() => handleBusSelect(bus)}
+                className="mt-4 px-4 py-0 rounded-sm w-full outline-none focus:normal-nums bg-teal-500 text-white hover:bg-teal-600 focus:outline-none focus:bg-teal-600"
+              >
+                Select Bus
+              </button>
+            </div>
+          );
+        })}
+
       {selectedBus && (
         <div className="border-t border-gray-300 pt-4">
           <div className="flex align-middle">
@@ -122,9 +131,23 @@ function BusLocation() {
               <span className="text-teal-300 text-sm font-semibold">
                 Sacco: {selectedBus.sacco}
               </span>
+              <div className="flex text-sm flex-col font-semibold"></div>
             </div>
             <div className="flex text-sm  flex-col font-semibold">
-              {selectedBus.routeId.name}
+              {routes.map((route) => {
+                if (route.id === selectedBus.id) {
+                  const routeName = route.name; // Assuming the route name property is called 'name'
+                  return (
+                    <div key={route.id}>
+                      <span className="text-sm text-emerald-300 font-semibold flex">
+                        {routeName}
+                      </span>
+                    </div>
+                  );
+                }
+                return null;
+              })}
+
               <p className="text-emerald-400">To: {selectedBus.to}</p>
             </div>
           </div>
@@ -164,11 +187,20 @@ function BusLocation() {
               className="p-2 mt-1 mb-2 w-full rounded-md border border-gray-300 focus:outline-none focus:border-teal-500"
             >
               <option value="">Select Location</option>
-              {selectedBus.routeId.stages.map((stage) => (
-                <option key={stage._id} value={stage.name}>
-                  {stage.name}
-                </option>
-              ))}
+              {/* Map through the routes and find the one matching the selected bus */}
+              {routes.map((route) => {
+                if (route.id === selectedBus.id) {
+                  return (
+                    // Map through the stages of the selected route and render each as an option
+                    route.stages.map((stage) => (
+                      <option key={stage._id} value={stage.name}>
+                        {stage.name}
+                      </option>
+                    ))
+                  );
+                }
+                return null;
+              })}
             </select>
           </div>
 

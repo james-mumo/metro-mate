@@ -91,7 +91,7 @@ router.post("/stkpush", (req, res) => {
           // If STK push is successful, send SMS
           sendSMS(
             phoneNumber,
-            "Kindly Show Message Metro Mate Operator! You are now officialy cool for Travelling With Us : )"
+            "Kindly Show Message Metro Mate Operator!  You are now officialy cool for Travelling With Us : )"
           );
           res.send(
             "😀 Request is successful done ✔✔. Please enter mpesa pin to complete the transaction"

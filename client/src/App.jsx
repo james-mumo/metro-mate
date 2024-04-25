@@ -9,13 +9,13 @@ import Notice from "./screens/Notice";
 import P2P from "./P2P";
 import Modal from "./screens/Modal";
 import Settings from "./screens/Settings";
-import { AppProvider } from "./AppContext"; // Import the AppProvider component
+import { AppProvider } from "./AppContext";
+import Logistics from "./screens/Logistics";
 
 function App() {
   return (
     <AppProvider>
       {" "}
-      {/* Wrap your entire application with AppProvider */}
       <div className="flex justify-center items-center h-screen p-0">
         <div className="min-w-[390px] w-[400px] flex flex-col p-0 bg-gray-900 relative">
           <Router>
@@ -27,7 +27,8 @@ function App() {
                     <Route exact path="/home" component={Dash} />
                     <Route exact path="/summ" component={Stops} />
                     <Route exact path="/map" component={Map} />
-                    <Route exact path="/search" component={Search} />
+                    <Route exact path="/search" component={Logistics} />
+                    {/* <Route exact path="/search" component={Search} /> */}
                     <Route exact path="/ptop" component={P2P} />
                     <Route exact path="/notice" component={Notice} />
                     <Route exact path="/settings" component={Settings} />

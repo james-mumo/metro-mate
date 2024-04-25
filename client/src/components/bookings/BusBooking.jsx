@@ -8,7 +8,7 @@ function BusBooking({ bookings, loading, error }) {
   if (error) {
     return <div className="text-center py-4 text-red-500">Error: {error}</div>;
   }
-
+  console.log(bookings);
   return (
     <ul className="border ">
       {bookings.map((booking) => (
@@ -28,7 +28,7 @@ function BusBooking({ bookings, loading, error }) {
             Payment Date: {new Date(booking.paymentDate).toLocaleString()}
             <br />
             Bus Details:
-            <br />- Bus No: {booking.busDetails.busNo}
+            <br />- Bus No: {booking.busDetails?.busNo}
             <br />- To: {booking.busDetails.to}
             <br />- Current Location: {booking.busDetails.currentLocation}
             <br />- Distance To Current Location:{" "}

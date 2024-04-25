@@ -20,7 +20,7 @@ function ListBuses() {
       </div>
       <div className="gap-1 flex-col px-2 flex rounded-md">
         {buses.map((bus) => {
-          const route = routes.find((route) => route._id === bus.routeId._id);
+          const route = routes.find((route) => route.id === bus.id);
           const currentStage = route.stages.find(
             (stage) => stage.name === bus.currentLocation
           );

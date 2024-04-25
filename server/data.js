@@ -6,6 +6,59 @@ export const minibuses = [
   { id: 3, name: "Minibus 3", capacity: 20 },
 ];
 
+export const trucks = [
+  {
+    company: "Kenya Cargo Movers",
+    numberPlate: "KCD 789A",
+    capacity: "10 tons",
+    pricePerHirePerHour: 1800,
+    currentLocation: "Westlands",
+    vehicleType: "Truck",
+    yearMade: 2020,
+    availability: 24,
+  },
+  {
+    company: "Nairobi Express Logistics",
+    numberPlate: "KCE 456B",
+    capacity: "5 tons",
+    pricePerHirePerHour: 1440,
+    currentLocation: "CBD",
+    vehicleType: "Van",
+    yearMade: 2021,
+    availability: 0,
+  },
+  {
+    company: "Movers Kenya Limited",
+    numberPlate: "KCE 456B",
+    capacity: "5 tons",
+    pricePerHirePerHour: 1440,
+    currentLocation: "Kilimani",
+    vehicleType: "Van",
+    yearMade: 2021,
+    availability: 6,
+  },
+  {
+    company: "Nairobi Transport Solutions",
+    numberPlate: "KDE 789C",
+    capacity: "8 tons",
+    pricePerHirePerHour: 2160,
+    currentLocation: "Lang'ata",
+    vehicleType: "Truck",
+    yearMade: 2022,
+    availability: 48,
+  },
+  {
+    company: "Kenya Moving Experts",
+    numberPlate: "KCL 012D",
+    capacity: "3 tons",
+    pricePerHirePerHour: 1260,
+    currentLocation: "Parklands",
+    vehicleType: "Van",
+    yearMade: 2020,
+    availability: 24,
+  },
+];
+
 export const routes = [
   {
     id: 1,

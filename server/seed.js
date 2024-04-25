@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import { appName, minibuses, routes, buses } from "./data.js";
+import { appName, minibuses, routes, buses, trucks } from "./data.js";
 
 const app = express();
 // uri
@@ -51,22 +51,36 @@ const busSchema = new mongoose.Schema({
   numberPlate: String,
 });
 
+const truckSchema = new mongoose.Schema({
+  company: String,
+  numberPlate: String,
+  capacity: String,
+  pricePerHirePerHour: Number,
+  currentLocation: String,
+  vehicleType: String,
+  yearMade: Number,
+  availability: Number,
+});
+
 const Minibus = mongoose.model("Minibus", minibusSchema);
 const Route = mongoose.model("Route", routeSchema);
 const Bus = mongoose.model("Bus", busSchema);
+const Truck = mongoose.model("Truck", truckSchema);
 
 // Function to seed data into MongoDB
 async function seedData() {
   try {
     // Clear existing data
-    await Minibus.deleteMany({});
+    // await Minibus.deleteMany({});
     await Route.deleteMany({});
     await Bus.deleteMany({});
+    // await Truck.deleteMany({});
 
     // Insert new data
-    await Minibus.insertMany(minibuses);
+    // await Minibus.insertMany(minibuses);
     await Route.insertMany(routes);
     await Bus.insertMany(buses);
+    // await Truck.insertMany(trucks);
 
     console.log("Data seeded successfully");
   } catch (error) {

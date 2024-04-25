@@ -11,6 +11,8 @@ import bookingRouter from "./routes/bookingRouter.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import mpesaRoutes from "./mpesa.js";
+import ussdRouter from "./ussdRouter.js";
+import trucksRouter from "./routes/truckRoutes.js";
 
 dotenv.config();
 
@@ -34,6 +36,8 @@ app.use("/api", bookingRouter);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api", mpesaRoutes);
+app.use("/api", ussdRouter);
+app.use("/api/trucks", trucksRouter);
 
 // MongoDB connection
 const uri = `mongodb+srv://98kithome:98kithome@cluster0.ijx96ju.mongodb.net/metro_mate`;
@@ -63,5 +67,6 @@ app.get("/", (req, res) => {
     getNotifs: "http://localhost:4000/api/notifications",
     addNotifs: "http://localhost:4000/api/notifications/add",
     deleteAllNotifs: "http://localhost:4000/api/notifications/deleteAll",
+    allTrucks: "http://localhost:4000/api/trucks",
   });
 });
